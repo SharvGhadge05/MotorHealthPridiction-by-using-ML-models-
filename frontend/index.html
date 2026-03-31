@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motor Health AI | Predictive Maintenance</title>
+    <meta name="description"
+        content="AI-powered motor health prediction system utilizing temperature, vibration, and RPM telemetry.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="mesh-bg"></div>
+    <div class="mesh-bg mesh-bg-2"></div>
+
+    <header class="header">
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20"></path>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            Motor Health AI
+        </div>
+        <div class="status">
+            <span class="status-dot"></span> System Online
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="hero">
+            <h1>Predictive <span>Maintenance</span></h1>
+            <p>Monitor your motor's health through real-time telemetry analysis. Utilize our machine learning engine to
+                diagnose potential failures before they happen.</p>
+        </div>
+
+        <div class="dashboard">
+            <!-- Single Prediction Card -->
+            <div class="card interactive-card">
+                <div class="card-header">
+                    <h2>Manual Entry</h2>
+                    <p>Enter telemetry manually for instant diagnosis</p>
+                </div>
+
+                <form id="single-predict-form" class="form">
+                    <div class="input-group">
+                        <label for="temperature">Temperature (°C)</label>
+                        <input type="number" id="temperature" name="temperature" step="0.1" required
+                            placeholder="e.g. 65.2">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="vibration">Vibration (mm/s)</label>
+                        <input type="number" id="vibration" name="vibration" step="0.01" required
+                            placeholder="e.g. 3.4">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="rpm">Speed (RPM)</label>
+                        <input type="number" id="rpm" name="rpm" required placeholder="e.g. 1450">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="btn-single-predict">
+                        <span class="btn-text">Run Diagnosis</span>
+                        <div class="loader hidden"></div>
+                    </button>
+                </form>
+
+                <div id="single-result-container" class="result-container hidden">
+                    <h3 class="result-label">Diagnosis Result</h3>
+                    <div id="single-result-value" class="result-value"></div>
+                </div>
+            </div>
+
+            <!-- Batch Prediction Card -->
+            <div class="card interactive-card">
+                <div class="card-header">
+                    <h2>Batch Analysis</h2>
+                    <p>Upload a CSV file with motor telemetry history</p>
+                </div>
+
+                <form id="batch-predict-form" class="form">
+                    <div class="upload-zone" id="upload-zone">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="upload-primary">Click to browse or drag CSV here</p>
+                        <p class="upload-secondary">Requires columns: temperature, vibration, rpm</p>
+                        <input type="file" id="csv-file" name="file" accept=".csv" required class="file-input">
+                    </div>
+
+                    <div id="file-info" class="file-info hidden">
+                        <span id="file-name"></span>
+                        <button type="button" id="remove-file" class="btn-icon">×</button>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary" id="btn-batch-predict" disabled>
+                        <span class="btn-text">Analyze Dataset</span>
+                        <div class="loader hidden"></div>
+                    </button>
+                </form>
+
+                <div id="batch-result-container" class="result-container hidden">
+                    <h3 class="result-label">Analysis Complete</h3>
+                    <p class="result-description">Batch processed successfully. Download the annotated results below.
+                    </p>
+                    <button class="btn btn-outline" id="btn-download-results">
+                        Download CSV Results
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
